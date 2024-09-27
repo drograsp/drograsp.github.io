@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>D(R,O) Grasp</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Zhenyu Wei">
+    <!-- <meta name="description" content=""> -->
+    <meta name="viewport" content="width=800px, initial-scale=0.8, maximum-scale=2.0, user-scalable=yes">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/image/favicon.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+    <!-- MathJax -->
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>        
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      });
+    </script>
+
+    <!-- visitor statistics -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <!-- model-viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+  </head>
+
+
+  <body>
+    <!-- Title -->
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">$\small \mathcal{D(R,O)}$ Grasp: A Unified Representation of Robot and Object
+                Interaction for Cross-Embodiment Dexterous Grasping</h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <b>Anonymous Authors</b>
+                </span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link -->
+                  <!-- <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span> -->
+                  <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">  <!-- ./static/data/drograsp.pdf -->
+                      <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <!-- <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Appendix</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Video Link -->
+                  <!--
+                  <span class="link-block">
+                    <a href="#"
+                        class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-youtube"></i>
+                      </span>
+                      <span>Video</span>
+                    </a>
+                  </span>
+                  -->
+
+                  <!-- Code Link -->
+                  <!-- <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span> -->
+
+                  <!-- Dataset Link -->
+                  <!-- <span class="link-block">
+                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fas fa-database"></i>
+                      </span>
+                      <span>Data</span>
+                    </a>
+                  </span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intro Video -->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video id="intro" controls playsinline height="100%" class="video-with-border">
+            <source src="./static/data/intro_video.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </section>
+    <!--/ Intro Video -->
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <!-- Abstract -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Dexterous grasping is a fundamental yet challenging skill in robotic manipulation, 
+                requiring precise interaction between robotic hands and objects. In this paper, we 
+                present $\mathcal{D(R,O)}$ Grasp, a novel framework that models the interaction 
+                between the robotic hand in its grasping pose and the object, enabling broad 
+                generalization across various robot hands and object geometries. Our model takes 
+                the robot hand’s description and object point cloud as inputs and efficiently 
+                predicts kinematically valid and stable grasps, demonstrating strong adapt ability 
+                to diverse robot embodiments and object geometries. Extensive experiments conducted 
+                in both simulated and real world environments validate the effectiveness of our 
+                approach, with significant improvements in success rate, grasp diversity, and 
+                inference speed across multiple robotic hands. Our method achieves an average 
+                success rate of 87.53% in simulation in less than one second, tested on three 
+                different dexterous robotic hands, and also performs successfully in real-world 
+                experiments using LeapHand. $\mathcal{D(R,O)}$ Grasp provides a robust solution for 
+                dexterous grasping in complex and varied environments.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--/ Abstract -->
+
+        <!-- Overview -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Pipeline Overview</h2>
+            <div class="content has-text-justified">
+              <figure>
+                <img src="./static/image/pipeline.png" alt="Overview of D(R,O) Grasp framework">
+                <figcaption style="font-style: normal; font-size: 0.95em;">Overview of $\mathcal{D(R,O)}$ Grasp: We first pretrain the robot encoder with the proposed configuration-invariant
+                  pretraining method. Then, we predict the $\mathcal{D(R,O)}$ representation between the robot and object point cloud. Finally, we
+                  extract joint values from the $\mathcal{D(R,O)}$ representation.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+        <!--/ Overview -->
+      </div>
+    </section>
+
+    <!-- Simulation Grasps -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <h2 class="title is-3 has-text-centered">Simulation Grasps</h2>
+          </div>
+        </div>
+
+        <div class="columns is-centered has-text-centered">
+          <!-- Model Viewer 1 for Barrett -->
+          <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
+            <model-viewer
+              id="modelViewer1"
+              src="static/data/3dmodel/Barrett/contactdb+apple/0.glb"
+              alt="Barrett Grasp"
+              ar
+              camera-controls
+              auto-rotate
+              auto-rotate-delay="1000"
+              interaction-prompt-threshold="2000"
+              style="width: 200px; height: 200px; border: 3px solid #66c0ff; border-radius: 15px;">
+            </model-viewer>
+            <p style="font-size: 20px; font-weight: bold;">Barrett</p>
+          </div>
+    
+          <!-- Model Viewer 2 for Allegro -->
+          <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
+            <model-viewer
+              id="modelViewer2"
+              src="static/data/3dmodel/Allegro/contactdb+apple/0.glb"
+              alt="Allegro Grasp"
+              ar
+              camera-controls
+              auto-rotate
+              auto-rotate-delay="1000"
+              interaction-prompt-threshold="2000"
+              style="width: 200px; height: 200px; border: 3px solid #66c0ff; border-radius: 15px;">
+            </model-viewer>
+            <p style="font-size: 20px; font-weight: bold;">Allegro</p>
+          </div>
+    
+          <!-- Model Viewer 3 for ShadowHand -->
+          <div class="column is-one-quarter" style="display: flex; flex-direction: column; align-items: center;">
+            <model-viewer
+              id="modelViewer3"
+              src="static/data/3dmodel/ShadowHand/contactdb+apple/0.glb"
+              alt="ShadowHand Grasp"
+              ar
+              camera-controls
+              auto-rotate
+              auto-rotate-delay="1000"
+              interaction-prompt-threshold="2000"
+              style="width: 200px; height: 200px; border: 3px solid #66c0ff; border-radius: 15px;">
+            </model-viewer>
+            <p style="font-size: 20px; font-weight: bold;">ShadowHand</p>
+          </div>
+    
+          <!-- Controls for Object and Grasp ID -->
+          <div class="column is-one-quarter">
+            <!-- Object Name Dropdown -->
+            <div class="dropdown-container" style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+              <label for="objectName" style="font-size: 20px; font-weight: bold;">Object Name</label>
+              <select id="objectName" class="custom-select" style="width: 200px; margin-top: 10px;">
+                <option value="contactdb+apple" style="font-size: 14px;">contactdb+apple</option>
+                <option value="contactdb+camera" style="font-size: 14px;">contactdb+camera</option>
+                <option value="contactdb+cylinder_medium" style="font-size: 14px;">contactdb+cylinder_medium</option>
+                <option value="contactdb+rubber_duck" style="font-size: 14px;">contactdb+rubber_duck</option>
+                <option value="contactdb+door_knob" style="font-size: 14px;">contactdb+door_knob</option>
+                <option value="contactdb+water_bottle" style="font-size: 14px;">contactdb+water_bottle</option>
+                <option value="ycb+baseball" style="font-size: 14px;">ycb+baseball</option>
+                <option value="ycb+pear" style="font-size: 14px;">ycb+pear</option>
+                <option value="ycb+potted_meat_can" style="font-size: 14px;">ycb+potted_meat_can</option>
+                <option value="ycb+tomato_soup_can" style="font-size: 14px;">ycb+tomato_soup_can</option>
+              </select>
+            </div>
+
+            <script>
+              function adjustSelectedFontSize() {
+                const selectElement = document.getElementById("objectName");
+                const selectedText = selectElement.options[selectElement.selectedIndex].text;
+                
+                const fontSize = Math.min(16, 320 / selectedText.length);
+                selectElement.style.fontSize = fontSize + "px";
+                const paddingSize = (32 - fontSize) / 2
+                selectElement.style.paddingTop = paddingSize + "px";
+                selectElement.style.paddingBottom = paddingSize + "px";
+              }
+            
+              window.onload = adjustSelectedFontSize;
+              document.getElementById("objectName").addEventListener("change", adjustSelectedFontSize);
+            </script>
+          
+            <!-- Grasp ID and Slider -->
+            <div class="slider-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+              <div style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">
+                Grasp ID: 
+                <span id="graspIDLabel">0</span>
+              </div>
+              <input type="range" id="graspID" name="graspID" min="0" max="9" value="0" style="width: 200px; height: 15px;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const modelViewer1 = document.getElementById('modelViewer1');
+      const modelViewer2 = document.getElementById('modelViewer2');
+      const modelViewer3 = document.getElementById('modelViewer3');
+      const objectNameSelect = document.getElementById('objectName');
+      const graspIDSlider = document.getElementById('graspID');
+      const graspIDLabel = document.getElementById('graspIDLabel');
+
+      const robotNames = ["Barrett", "Allegro", "ShadowHand"];
+
+      function updateModel() {
+        const selectedObject = objectNameSelect.value;
+        const selectedGraspID = graspIDSlider.value;
+
+        graspIDLabel.textContent = selectedGraspID;
+
+        modelViewer1.src = `static/data/3dmodel/Barrett/${selectedObject}/${selectedGraspID}.glb`;
+        modelViewer2.src = `static/data/3dmodel/Allegro/${selectedObject}/${selectedGraspID}.glb`;
+        modelViewer3.src = `static/data/3dmodel/ShadowHand/${selectedObject}/${selectedGraspID}.glb`;
+      }
+      objectNameSelect.addEventListener('change', updateModel);
+      graspIDSlider.addEventListener('input', updateModel);
+    </script>
+    <!--/ Simulation Grasps -->
+
+
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column">
+            <h2 class="title is-3 has-text-centered">Real-world Demos</h2>
+          </div>
+        </div>
+    
+        <div class="columns is-centered has-text-centered">
+          <section class="video-section" style="display: flex; padding: 20px;">
+            <div class="main-video-container" style="flex: 2; margin-top: 25px; margin-right: 50px; text-align: center;">
+              <video id="main-video" autoplay muted loop playsinline style="width: 700px;" class="video-with-border">
+                <source src="static/data/realworld/apple.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          
+            <div class="covers-container" style="flex: 1; overflow-y: auto; height: 600px; display: flex; flex-direction: column; align-items: center;">
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/apple.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/apple_cover.png" alt="Apple Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Apple</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/bag.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/bag_cover.png" alt="Bag Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Bag</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/brush.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/brush_cover.png" alt="Brush Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Brush</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/cookie_box.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/cookie_box_cover.png" alt="Cookie Box Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Cookie Box</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/cube.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/cube_cover.png" alt="Cube Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Cube</p>
+              </div>
+              
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/cup.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/cup_cover.png" alt="Cup Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Cup</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/dinosaur.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/dinosaur_cover.png" alt="Dinosaur Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Dinosaur</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/duck.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/duck_cover.png" alt="Duck Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Duck</p>
+              </div>
+              
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/tea_box.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/tea_box_cover.png" alt="Tea Box Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Tea Box</p>
+              </div>
+            
+              <div class="video-cover" onclick="changeVideo('static/data/realworld/toilet_cleaner.mp4')" style="margin-bottom: 10px; cursor: pointer;">
+                <img src="static/data/realworld/toilet_cleaner_cover.png" alt="Toilet Cleaner Cover" style="width: 120px; height: 120px;">
+                <p style="text-align: center;">Toilet Cleaner</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    
+    <script>
+      function changeVideo(videoSrc) {
+        const mainVideo = document.getElementById('main-video');
+        mainVideo.src = videoSrc;
+        mainVideo.muted = true;
+        mainVideo.loop = true;
+        mainVideo.load();
+        mainVideo.play();
+      }
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer", style="padding: 40px 0;">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p style="text-align: center;">
+                This website is designed based on
+                <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+                <br>
+                For anonymous viewing only.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--/ Footer -->
+
+  </body>
+</html>
